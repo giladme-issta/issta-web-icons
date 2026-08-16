@@ -6,8 +6,10 @@
 <title>Issta Web Icons — ספריית אייקונים</title>
 
 <!-- הפונט עצמו נטען ישירות מה-CDN של איסתא -->
-<link rel="stylesheet" href="https://cdn.issta.co.il/icons/issta-web-icons/style.css">
-<link rel="stylesheet" href="https://cdn.issta.co.il/icons/issta-icons/style.css">
+<!-- גיליון הסגנון של הערכה הפעילה — מוחלף דינמית בעת מעבר בין ערכות.
+     חובה לטעון רק אחד בכל רגע: issta-web-icons ו-issta-cms-icons חולקות
+     את הקידומת icon- ואת שם הגופן icomoon, ולכן ידרסו זו את זו. -->
+<link rel="stylesheet" id="icon-css" href="https://cdn.issta.co.il/icons/issta-web-icons/style.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -69,21 +71,26 @@ h1{font-size:clamp(26px,4vw,40px);font-weight:900;letter-spacing:-.02em;margin:1
 .stat span{font-size:12px;color:#C3D0DE;letter-spacing:.04em}
 
 /* בורר ערכות */
-.sets{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
+.sets{display:flex;gap:7px;margin-top:18px;flex-wrap:wrap}
 .set{
   background:rgba(255,255,255,.08);
   border:1px solid rgba(255,255,255,.22);
   border-radius:var(--radius);
-  padding:9px 16px;cursor:pointer;color:#D7E1EB;
+  padding:8px 13px;cursor:pointer;color:#D7E1EB;
   font-family:inherit;text-align:right;line-height:1.3;
   transition:background .12s,border-color .12s,color .12s;
 }
-.set b{display:block;font-family:"IBM Plex Mono",monospace;font-size:13.5px;font-weight:500;direction:ltr;text-align:right}
-.set span{font-family:"IBM Plex Mono",monospace;font-size:10.5px;opacity:.7;direction:ltr;display:block;text-align:right}
+.set b{display:block;font-family:"IBM Plex Mono",monospace;font-size:12.5px;font-weight:500;direction:ltr;text-align:right}
+.set span{font-family:"IBM Plex Mono",monospace;font-size:10px;opacity:.7;direction:ltr;display:block;text-align:right}
 .set:hover{background:rgba(255,255,255,.15)}
 .set[aria-pressed="true"]{background:var(--apricot);border-color:var(--apricot);color:#4A3021}
 .set[aria-pressed="true"] span{opacity:.75}
 .set:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.set-note{
+  margin:12px 0 0;font-size:12.5px;color:#F3D9C6;max-width:64ch;
+  border-right:2px solid var(--apricot);padding-right:10px;
+}
+.set-note code{font-family:"IBM Plex Mono",monospace;font-size:11.5px;direction:ltr;display:inline-block}
 
 /* קו הניקוב של הכרטיס */
 .perf{position:absolute;left:0;right:0;bottom:-1px;height:14px;overflow:hidden}
@@ -138,6 +145,7 @@ input[type=range]{accent-color:var(--slate);width:104px}
 .size-val{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted);min-width:38px;direction:ltr}
 
 .chips{max-width:1280px;margin:0 auto;padding:0 24px 14px;display:flex;gap:7px;flex-wrap:wrap;align-items:center}
+.chips[hidden]{display:none}
 .chips .label{font-size:12px;color:var(--muted);margin-left:4px}
 .chip{
   border:1px solid var(--line);background:var(--card);color:var(--muted);
@@ -254,7 +262,7 @@ html[data-theme="dark"] footer a{color:var(--apricot)}
     <div>
       <div class="eyebrow">issta&nbsp;·&nbsp;web icons</div>
       <h1>ספריית האייקונים</h1>
-      <p class="sub">שתי ערכות האייקונים של איסתא במקום אחד. לחיצה על אייקון מעתיקה את שם המחלקה, ולחיצה על <code style="font-family:'IBM Plex Mono',monospace">&lt;/&gt;</code> מעתיקה קטע HTML מוכן.</p>
+      <p class="sub">כל ערכות האייקונים של איסתא במקום אחד. לחיצה על אייקון מעתיקה את שם המחלקה, ולחיצה על <code style="font-family:'IBM Plex Mono',monospace">&lt;/&gt;</code> מעתיקה קטע HTML מוכן.</p>
 
       <div class="sets" role="group" aria-label="בחירת ערכת אייקונים">
         <button class="set" data-set="web" aria-pressed="true">
@@ -265,7 +273,20 @@ html[data-theme="dark"] footer a{color:var(--apricot)}
           <b>issta-icons</b>
           <span>ist-icon-&hellip;&nbsp;·&nbsp;issta-icomoon</span>
         </button>
+        <button class="set" data-set="cms" aria-pressed="false">
+          <b>issta-cms-icons</b>
+          <span>icon-&hellip;&nbsp;·&nbsp;icomoon</span>
+        </button>
+        <button class="set" data-set="ng" aria-pressed="false">
+          <b>issta-ng-icons</b>
+          <span>ng-icon-&hellip;&nbsp;·&nbsp;ng-icomoon</span>
+        </button>
+        <button class="set" data-set="bynd" aria-pressed="false">
+          <b>bynd-icons</b>
+          <span>icon-f-&hellip;&nbsp;·&nbsp;f-icomoon</span>
+        </button>
       </div>
+      <p class="set-note" id="set-note" hidden></p>
     </div>
     <div class="stats">
       <div class="stat"><b id="stat-total">—</b><span>אייקונים</span></div>
@@ -348,6 +369,18 @@ html[data-theme="dark"] footer a{color:var(--apricot)}
 .ist-icon-cal-logo:before{content:"\e927";color:#1b5ece}.ist-icon-credit-card-info:before{content:"\e920";color:#098137}.ist-icon-bread-toast:before{content:"\e91c";color:#687482}.ist-icon-travel-bus:before{content:"\e91d";color:#687482}.ist-icon-Union:before{content:"\e91b"}.ist-icon-no-baggage:before{content:"\e90f";color:#687482}.ist-icon-add-baggage:before{content:"\e911";color:#098137}.ist-icon-change-flight:before{content:"\e91a";color:#687482}.ist-icon-deals-flight:before{content:"\e90e"}.ist-icon-help-chat:before{content:"\e903"}.ist-icon-soccer:before{content:"\e919"}.ist-icon-calendar-2:before{content:"\e918"}.ist-icon-checkout-handbag:before{content:"\e914";color:#687482}.ist-icon-checkout-no-baggage:before{content:"\e915";color:#687482}.ist-icon-checkout-no-handbag:before{content:"\e916";color:#687482}.ist-icon-checkout-baggage:before{content:"\e917";color:#687482}.ist-icon-pencil1:before{content:"\e90c";color:#687482}.ist-icon-filter:before{content:"\e90d";color:#687482}.ist-icon-map-point:before{content:"\e910";color:#687482}.ist-icon-list-1:before{content:"\e912";color:#6b767b}.ist-icon-location-point:before{content:"\e913";color:#687482}.ist-icon-spa-flower:before{content:"\e90b";color:#687482}.ist-icon-default-facility:before{content:"\e905";color:#687482}.ist-icon-beach:before{content:"\e906";color:#687482}.ist-icon-swim-pool:before{content:"\e907";color:#687482}.ist-icon-wifi:before{content:"\e908";color:#687482}.ist-icon-spaja:before{content:"\e909";color:#687482}.ist-icon-air-cond:before{content:"\e90a";color:#687482}.ist-icon-property-1-location:before{content:"\e902";color:#687482}.ist-icon-property-airplane:before{content:"\e904";color:#687482}.ist-icon-vacation-1:before{content:"\e900"}.ist-icon-vip-group:before{content:"\e901"}.ist-icon-coins:before{content:"\e97d"}.ist-icon-bullet:before{content:"\e9bb"}.ist-icon-calendar-3:before{content:"\e91e"}.ist-icon-V:before{content:"\e91f";color:#098137}.ist-icon-arrow-slider-left .path1:before{content:"\e921";color:#fff}.ist-icon-arrow-slider-left .path2:before{content:"\e922";margin-left:-.9306640625em;color:none}.ist-icon-arrow-slider-left .path3:before{content:"\e923";margin-left:-.9306640625em;color:#687482}.ist-icon-arrow-slider-right .path1:before{content:"\e924";color:#fff}.ist-icon-arrow-slider-right .path2:before{content:"\e925";margin-left:-.9306640625em;color:none}.ist-icon-arrow-slider-right .path3:before{content:"\e926";margin-left:-.9306640625em;color:#687482}.ist-icon-edit:before{content:"\e94c";color:#188924}.ist-icon-pencil:before{content:"\e944"}.ist-icon-star-icon:before{content:"\eb4b"}
 </script>
 
+<script type="text/plain" id="src-css-bynd">
+.icon-f-secure:before{content:"\e904";color:#fff}.icon-f-faq:before{content:"\e905";color:#fff}.icon-f-like:before{content:"\e906";color:#fff}.icon-f-airplane-up:before{content:"\e900"}.icon-f-suitcases:before{content:"\e901"}.icon-f-beach:before{content:"\e902"}.icon-f-hotel2:before{content:"\e903"}.icon-f-bus:before{content:"\e9c1"}.icon-f-last-minute:before{content:"\e9c4"}
+</script>
+
+<script type="text/plain" id="src-css-ng">
+.ng-icon-back:before{content:"\e902"}.ng-icon-calendar:before{content:"\e903"}.ng-icon-cars:before{content:"\e905"}.ng-icon-close:before{content:"\e906"}.ng-icon-flights:before{content:"\e909"}.ng-icon-to:before{content:"\e90a"}.ng-icon-hotels:before{content:"\e90b"}.ng-icon-open_more:before{content:"\e90e"}.ng-icon-from:before{content:"\e90f"}.ng-icon-vacations:before{content:"\e910"}.ng-icon-search:before{content:"\e918"}.ng-icon-org:before{content:"\e91d"}.ng-icon-pnim:before{content:"\e91e"}.ng-icon-check:before{content:"\e925"}.ng-icon-mial:before{content:"\e92f"}.ng-icon-phone:before{content:"\e930"}.ng-icon-place:before{content:"\e939"}.ng-icon-man:before{content:"\e965"}.ng-icon-alert:before{content:"\e96e"}.ng-icon-comb_icon:before{content:"\e972"}.ng-icon-bundle:before{content:"\e983"}.ng-icon-flight:before{content:"\e9b6"}.ng-icon-Flight-down2:before{content:"\e9cb"}
+</script>
+
+<script type="text/plain" id="src-css-cms">
+.icon-search-header:before{content:"\e9b9";color:#fff}.icon-icon-navigation-m:before{content:"\e9ab";color:#687482}.icon-Sunbad:before{content:"\e9c1"}.icon-Suitcases:before{content:"\e9c2"}.icon-Airplane:before{content:"\e9c3"}.icon-boat:before{content:"\e9c4"}.icon-Cabin:before{content:"\e9c5"}.icon-five-star-hotel:before{content:"\e9c6"}.icon-Call:before{content:"\e9c0";color:#0db04b}.icon-Corona-Alret .path1:before{content:"\e9be";color:#ffd0b6}.icon-Corona-Alret .path2:before{content:"\e9bf";margin-left:-1.1748046875em;color:#000}.icon-thin-arrow-left:before{content:"\e9bc"}.icon-thin-arrow-right:before{content:"\e9bd"}.icon-arrow-right:before{content:"\e9ba"}.icon-bullet-green:before{content:"\e9bb";color:#00ac4f}.icon-add-green:before{content:"\e9af";color:#178823}.icon-hotel:before{content:"\e9b0"}.icon-two-arrows-left:before{content:"\e9b1"}.icon-info-official:before{content:"\e9b2";color:#717579}.icon-addition:before{content:"\e9b3"}.icon-coupon:before{content:"\e9b4";color:#178823}.icon-check-mark:before{content:"\e9b5";color:#48a0dc}.icon-flight:before{content:"\e9b6"}.icon-pencil-slant:before{content:"\e9b7"}.icon-lock:before{content:"\e9b8"}.icon-tickets:before{content:"\e9ae"}.icon-no-luggage:before{content:"\e9ad";color:#4f4b4b}.icon-cost:before{content:"\e9a6"}.icon-details_i:before{content:"\e9a7"}.icon-location_pin:before{content:"\e9a8"}.icon-leap:before{content:"\e9a9"}.icon-pack_include:before{content:"\e9aa"}.icon-sun:before{content:"\e9ac"}.icon-eye:before{content:"\e9a5";color:#fff}.icon-extend:before{content:"\e975";color:#fff}.icon-snow-park:before{content:"\e94d";color:#72849a}.icon-synthetic-snow:before{content:"\e951";color:#72849a}.icon-elavators:before{content:"\e952";color:#72849a}.icon-site-height:before{content:"\e954";color:#72849a}.icon-mountain:before{content:"\e95f";color:#91a6bf}.icon-block:before{content:"\e93d";color:#607288}.icon-cancel-flight:before{content:"\e942";color:#607288}.icon-giftbox:before{content:"\e92c"}.icon-smiley:before{content:"\e92a"}.icon-check:before{content:"\e925"}.icon-carDoor_icon:before{content:"\e961"}.icon-collectCar_icon:before{content:"\e962"}.icon-fuel_icon:before{content:"\e963"}.icon-hiluhim_icon:before{content:"\e964"}.icon-kmLimit_icon:before{content:"\e9a1"}.icon-refundCar_icon:before{content:"\e9a4"}.icon-magen:before{content:"\e943"}.icon-woman:before{content:"\e960"}.icon-order-view:before{content:"\e959"}.icon-person-info:before{content:"\e95a"}.icon-telphone-background:before{content:"\e95b"}.icon-phone-background:before{content:"\e95c"}.icon-envelop-background:before{content:"\e95d"}.icon-file-text:before{content:"\e95e"}.icon-big_lug_icon:before{content:"\e957"}.icon-small_lug_icon:before{content:"\e958"}.icon-wallet_icon:before{content:"\e956"}.icon-gallery:before{content:"\e955"}.icon-door:before{content:"\e904"}.icon-arrow-down:before{content:"\e99b"}.icon-airplane-arrive-table:before{content:"\e99c"}.icon-airplane-depart-table:before{content:"\e99d"}.icon-arrows:before{content:"\e99e"}.icon-budget:before{content:"\e99f"}.icon-equalizer:before{content:"\e9a0"}.icon-menu2:before{content:"\e9a2"}.icon-left-double-arrow:before{content:"\e9a3"}.icon-no_lugg:before{content:"\e99a"}.icon-air:before{content:"\e989"}.icon-change:before{content:"\e98a"}.icon-children:before{content:"\e98b"}.icon-disabled:before{content:"\e98c"}.icon-families:before{content:"\e98d"}.icon-food:before{content:"\e98e"}.icon-gym:before{content:"\e98f"}.icon-intart:before{content:"\e990"}.icon-negishut2:before{content:"\e991"}.icon-parking:before{content:"\e992"}.icon-pets:before{content:"\e993"}.icon-rests:before{content:"\e994"}.icon-sinagogue:before{content:"\e995"}.icon-spa:before{content:"\e996"}.icon-swpool:before{content:"\e997"}.icon-transfer:before{content:"\e998"}.icon-wifi:before{content:"\e999"}.icon-upDown:before{content:"\e988"}.icon-main_left:before{content:"\e986"}.icon-main_right:before{content:"\e987"}.icon-back_icon:before{content:"\e985"}.icon-bundle:before{content:"\e983"}.icon-ticker:before{content:"\e984"}.icon-call:before{content:"\e982"}.icon-flightback:before{content:"\e981"}.icon-v_icon:before{content:"\e980"}.icon-kafri:before{content:"\e900"}.icon-sport:before{content:"\e901"}.icon-back:before{content:"\e902"}.icon-calendar:before{content:"\e903"}.icon-cars:before{content:"\e905"}.icon-close:before{content:"\e906"}.icon-dates-arrow:before{content:"\e907"}.icon-delete:before{content:"\e908"}.icon-flights:before{content:"\e909"}.icon-to:before{content:"\e90a"}.icon-hotels:before{content:"\e90b"}.icon-class_icon:before{content:"\e90c"}.icon-menu:before{content:"\e90d"}.icon-open_more:before{content:"\e90e"}.icon-from:before{content:"\e90f"}.icon-vacations:before{content:"\e910"}.icon-close-more:before{content:"\e911"}.icon-date-end:before{content:"\e912"}.icon-date-start:before{content:"\e913"}.icon-blog:before{content:"\e914"}.icon-bsis_lina:before{content:"\e915"}.icon-like:before{content:"\e916"}.icon-filter:before{content:"\e917"}.icon-search:before{content:"\e918"}.icon-sort:before{content:"\e919"}.icon-abroad:before{content:"\e91a"}.icon-concerts:before{content:"\e91b"}.icon-last_min:before{content:"\e91c"}.icon-org:before{content:"\e91d"}.icon-pnim:before{content:"\e91e"}.icon-uniE91F:before{content:"\e91f"}.icon-uniE920:before{content:"\e920"}.icon-uniE921:before{content:"\e921"}.icon-shait2:before{content:"\e922"}.icon-sport2:before{content:"\e923"}.icon-support:before{content:"\e924"}.icon-uniE926:before{content:"\e926"}.icon-face_full:before{content:"\e927"}.icon-google_full:before{content:"\e928"}.icon-tw_full:before{content:"\e929"}.icon-branches:before{content:"\e92b"}.icon-fl_update:before{content:"\e92d"}.icon-id:before{content:"\e92e"}.icon-mial:before{content:"\e92f"}.icon-phone:before{content:"\e930"}.icon-lastcall:before{content:"\e931"}.icon-meurganim:before{content:"\e932"}.icon-shait:before{content:"\e933"}.icon-ski:before{content:"\e934"}.icon-uniE935:before{content:"\e935"}.icon-uniE936:before{content:"\e936"}.icon-uniE937:before{content:"\e937"}.icon-tzeirim:before{content:"\e938"}.icon-place:before{content:"\e939"}.icon-robot:before{content:"\e93a"}.icon-service:before{content:"\e93b"}.icon-fax:before{content:"\e93c"}.icon-phone_branch:before{content:"\e93e"}.icon-ok_icon:before{content:"\e93f"}.icon-chanceflurries:before{content:"\e940"}.icon-chancerain:before{content:"\e941"}.icon-clear:before{content:"\e945"}.icon-cloudy:before{content:"\e946"}.icon-default:before{content:"\e947"}.icon-flurries:before{content:"\e948"}.icon-fog:before{content:"\e949"}.icon-hazy:before{content:"\e94a"}.icon-mostlycloudy:before{content:"\e94b"}.icon-partlysunny:before{content:"\e94e"}.icon-rain:before{content:"\e94f"}.icon-sleet:before{content:"\e950"}.icon-tstorms:before{content:"\e953"}.icon-man:before{content:"\e965"}.icon-students_star:before{content:"\e966"}.icon-concertst_empty:before{content:"\e967"}.icon-bundle_empty:before{content:"\e968"}.icon-car_empty:before{content:"\e969"}.icon-hotel_empty:before{content:"\e96a"}.icon-maslul_day_empty:before{content:"\e96b"}.icon-organized_empty:before{content:"\e96c"}.icon-sport_empty:before{content:"\e96d"}.icon-alert:before{content:"\e96e"}.icon-info:before{content:"\e96f"}.icon-stadium:before{content:"\e970"}.icon-companies_icon:before{content:"\e971"}.icon-comb_icon:before{content:"\e972"}.icon-menu_arrow:before{content:"\e973"}.icon-ccard_icon:before{content:"\e974"}.icon-flights_empty:before{content:"\e976"}.icon-electr_icon:before{content:"\e977"}.icon-lang_icon:before{content:"\e978"}.icon-mivtza:before{content:"\e979"}.icon-atractions_icon:before{content:"\e97a"}.icon-family_icon:before{content:"\e97b"}.icon-night_icon:before{content:"\e97c"}.icon-coins:before{content:"\e97d"}.icon-flightdur:before{content:"\e97e"}.icon-localtime:before{content:"\e97f"}.icon-edit:before{content:"\e94c";color:#188924}.icon-pencil:before{content:"\e944"}
+</script>
+
 <script>
 (function () {
   "use strict";
@@ -359,7 +392,8 @@ html[data-theme="dark"] footer a{color:var(--apricot)}
       prefix: "icon-",
       srcId: "src-css-web",
       font: "icomoon",
-      chips: ["hotel", "flight", "car", "arrow", "rate", "chat", "basis", "policy", "se-"]
+      chips: ["hotel", "flight", "car", "arrow", "rate", "chat", "basis", "policy", "se-"],
+      note: 'ערכה זו חולקת את הקידומת <code>icon-</code> ואת שם הגופן <code>icomoon</code> עם <code>issta-cms-icons</code>. אין לטעון את שתיהן יחד באותו עמוד — הן ידרסו זו את זו.'
     },
     ist: {
       key: "ist",
@@ -368,6 +402,32 @@ html[data-theme="dark"] footer a{color:var(--apricot)}
       srcId: "src-css-ist",
       font: "issta-icomoon",
       chips: ["baggage", "checkout", "flight", "calendar", "property", "arrow", "pencil"]
+    },
+    cms: {
+      key: "cms",
+      url: "https://cdn.issta.co.il/icons/issta-cms-icons/style.css",
+      prefix: "icon-",
+      srcId: "src-css-cms",
+      font: "icomoon",
+      chips: ["hotel", "flight", "car", "arrow", "empty", "icon", "lug", "phone"],
+      note: 'ערכה זו חולקת את הקידומת <code>icon-</code> ואת שם הגופן <code>icomoon</code> עם <code>issta-web-icons</code>. אין לטעון את שתיהן יחד באותו עמוד — הן ידרסו זו את זו.'
+    },
+    ng: {
+      key: "ng",
+      url: "https://cdn.issta.co.il/icons/issta-ng-icons/style.css",
+      prefix: "ng-icon-",
+      srcId: "src-css-ng",
+      font: "ng-icomoon",
+      chips: []
+    },
+    bynd: {
+      key: "bynd",
+      url: "https://cdn.issta.co.il/icons/bynd-icons/style.css",
+      prefix: "icon-f-",
+      srcId: "src-css-bynd",
+      font: "f-icomoon",
+      chips: [],
+      note: 'הקידומת <code>icon-f-</code> היא תת-קבוצה של <code>icon-</code>. אם ערכה זו נטענת יחד עם <code>issta-web-icons</code> או <code>issta-cms-icons</code>, הסלקטור <code>[class^=icon-]</code> שלהן יחול גם על אייקונים אלה, וסדר הטעינה יקבע איזה גופן ינצח.'
     }
   };
 
@@ -592,6 +652,7 @@ html[data-theme="dark"] footer a{color:var(--apricot)}
   function renderChips(set) {
     var box = document.getElementById("chips");
     box.querySelectorAll(".chip").forEach(function (c) { c.remove(); });
+    box.hidden = !set.chips.length;
     set.chips.forEach(function (term) {
       var chip = document.createElement("button");
       chip.type = "button";
@@ -625,6 +686,13 @@ html[data-theme="dark"] footer a{color:var(--apricot)}
     resort();
     apply();
     renderChips(set);
+
+    // רק גיליון אחד נטען בכל רגע — ראו הערת ההתנגשות ב-<head>
+    document.getElementById("icon-css").href = set.url;
+
+    var note = document.getElementById("set-note");
+    if (set.note) { note.innerHTML = set.note; note.hidden = false; }
+    else { note.hidden = true; note.innerHTML = ""; }
 
     var link = document.getElementById("src-link");
     link.href = set.url;
