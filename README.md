@@ -1,9 +1,10 @@
 # Issta Web Icons — Browser
 
+**Live:** https://giladme-issta.github.io/issta-web-icons/
+
 A single-file HTML page that renders every icon in the Issta `icomoon` icon font, with search, filtering and one-click copy of the class name or a ready-to-paste HTML snippet.
 
 Source of truth: `https://cdn.issta.co.il/icons/issta-web-icons/style.css`
-link to page of this project: `https://giladme-issta.github.io/issta-web-icons/`
 
 **364 icons total — 305 single-color, 59 multi-color.**
 
