@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Issta Web Icons — ספריית אייקונים</title>
+
+<!-- הפונט עצמו נטען ישירות מה-CDN של איסתא -->
+<link rel="stylesheet" href="https://cdn.issta.co.il/icons/issta-web-icons/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --paper:#EEF1F5;
+  --card:#FFFFFF;
+  --ink:#1B2634;
+  --muted:#6C7C90;
+  --line:#DCE3EC;
+  --slate:#485D77;
+  --slate-deep:#2A3A4E;
+  --apricot:#FFC09C;
+  --apricot-deep:#EF9478;
+  --go:#0DB14B;
+  --icon-size:40px;
+  --radius:10px;
+}
+html[data-theme="dark"]{
+  --paper:#141C26;
+  --card:#1D2734;
+  --ink:#E8EDF3;
+  --muted:#8FA0B4;
+  --line:#2B3746;
+  --slate-deep:#0E151E;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Heebo",-apple-system,"Segoe UI",Arial,sans-serif;
+  font-size:15px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---------- כרטיס עלייה למטוס (הדר) ---------- */
+.board{
+  position:relative;
+  background:var(--slate);
+  background-image:linear-gradient(115deg,#3E5670 0%,#4E6580 55%,#5B738E 100%);
+  color:#fff;
+  padding:34px 24px 30px;
+}
+.board-inner{max-width:1280px;margin:0 auto;display:flex;flex-wrap:wrap;gap:24px;align-items:flex-end;justify-content:space-between}
+.eyebrow{
+  font-family:"IBM Plex Mono",monospace;
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--apricot);direction:ltr;text-align:right;
+  display:flex;align-items:center;gap:10px;justify-content:flex-end;
+}
+.eyebrow::before{content:"";width:26px;height:2px;background:var(--apricot);display:block}
+h1{font-size:clamp(26px,4vw,40px);font-weight:900;letter-spacing:-.02em;margin:10px 0 6px}
+.sub{margin:0;color:#D3DDE8;max-width:52ch;font-size:14.5px}
+.stats{display:flex;gap:26px;flex-wrap:wrap}
+.stat b{display:block;font-family:"IBM Plex Mono",monospace;font-size:26px;font-weight:500;color:var(--apricot);line-height:1.1}
+.stat span{font-size:12px;color:#C3D0DE;letter-spacing:.04em}
+
+/* קו הניקוב של הכרטיס */
+.perf{position:absolute;left:0;right:0;bottom:-1px;height:14px;overflow:hidden}
+.perf::before{
+  content:"";position:absolute;left:12px;right:12px;top:6px;height:0;
+  border-top:2px dashed rgba(255,255,255,.35);
+}
+.notch{position:absolute;bottom:-9px;width:18px;height:18px;border-radius:50%;background:var(--paper)}
+.notch.a{right:-9px}
+.notch.b{left:-9px}
+
+/* ---------- שורת שליטה ---------- */
+.controls{
+  position:sticky;top:0;z-index:20;
+  background:color-mix(in srgb,var(--paper) 88%,transparent);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.controls-inner{max-width:1280px;margin:0 auto;padding:14px 24px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+
+.search{position:relative;flex:1 1 300px;min-width:220px}
+.search input{
+  width:100%;padding:11px 42px 11px 76px;
+  border:1px solid var(--line);border-radius:var(--radius);
+  background:var(--card);color:var(--ink);
+  font-family:"IBM Plex Mono",monospace;font-size:14px;
+  direction:ltr;text-align:left;
+}
+.search input:focus{outline:2px solid var(--apricot-deep);outline-offset:1px;border-color:transparent}
+.search input::placeholder{color:var(--muted);opacity:.8}
+.search .glass{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none;font-size:15px}
+.search kbd{
+  position:absolute;left:12px;top:50%;transform:translateY(-50%);
+  font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--muted);
+  border:1px solid var(--line);border-radius:5px;padding:2px 6px;background:var(--paper);
+}
+
+.seg{display:flex;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--card)}
+.seg button{
+  border:0;background:transparent;color:var(--muted);cursor:pointer;
+  font-family:inherit;font-size:13px;padding:9px 14px;white-space:nowrap;
+}
+.seg button+button{border-right:1px solid var(--line)}
+.seg button[aria-pressed="true"]{background:var(--slate);color:#fff}
+.seg button:focus-visible{outline:2px solid var(--apricot-deep);outline-offset:-2px}
+
+.field{display:flex;align-items:center;gap:9px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:7px 13px}
+.field label{font-size:12.5px;color:var(--muted);white-space:nowrap}
+.field select{border:0;background:transparent;color:var(--ink);font-family:inherit;font-size:13px;cursor:pointer}
+.field select:focus{outline:none}
+input[type=range]{accent-color:var(--slate);width:104px}
+.size-val{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted);min-width:38px;direction:ltr}
+
+.chips{max-width:1280px;margin:0 auto;padding:0 24px 14px;display:flex;gap:7px;flex-wrap:wrap;align-items:center}
+.chips .label{font-size:12px;color:var(--muted);margin-left:4px}
+.chip{
+  border:1px solid var(--line);background:var(--card);color:var(--muted);
+  border-radius:100px;padding:4px 12px;font-family:"IBM Plex Mono",monospace;font-size:11.5px;
+  cursor:pointer;direction:ltr;
+}
+.chip:hover{border-color:var(--apricot-deep);color:var(--ink)}
+
+/* ---------- הגריד ---------- */
+main{max-width:1280px;margin:0 auto;padding:22px 24px 70px}
+.count{font-size:13px;color:var(--muted);margin:0 0 14px}
+.count b{color:var(--ink);font-family:"IBM Plex Mono",monospace;font-weight:500}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(158px,1fr));
+  gap:10px;
+}
+.cell{
+  position:relative;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:16px 8px 10px;
+  text-align:center;
+  cursor:pointer;
+  transition:border-color .12s,transform .12s,box-shadow .12s;
+  overflow:hidden;
+}
+.cell:hover{border-color:var(--apricot-deep);transform:translateY(-2px);box-shadow:0 6px 16px rgba(27,38,52,.09)}
+.cell:focus-visible{outline:2px solid var(--apricot-deep);outline-offset:2px}
+.cell.copied{border-color:var(--go)}
+
+.art{
+  height:calc(var(--icon-size) + 26px);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.ico{
+  font-size:var(--icon-size);
+  line-height:1;
+  direction:ltr;
+  unicode-bidi:isolate;
+  color:var(--ink);
+  display:inline-block;
+}
+.grid.mono .ico,.grid.mono .ico *{color:var(--ink)!important}
+.grid.mono .ico::before,.grid.mono .ico *::before{color:currentColor!important}
+
+.nm{
+  font-family:"IBM Plex Mono",monospace;
+  font-size:11px;line-height:1.35;
+  direction:ltr;
+  word-break:break-all;
+  color:var(--ink);
+  margin-top:6px;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+.uni{font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--muted);direction:ltr;margin-top:3px}
+
+.badge{
+  position:absolute;top:7px;left:7px;
+  font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.06em;
+  background:var(--apricot);color:#5A3C2A;border-radius:4px;padding:1px 5px;
+}
+.snip{
+  position:absolute;top:5px;right:5px;
+  border:1px solid var(--line);background:var(--card);color:var(--muted);
+  border-radius:6px;width:24px;height:22px;line-height:1;
+  font-family:"IBM Plex Mono",monospace;font-size:10px;cursor:pointer;
+  opacity:0;transition:opacity .12s;
+}
+.cell:hover .snip,.snip:focus-visible{opacity:1}
+.snip:hover{color:var(--ink);border-color:var(--apricot-deep)}
+
+.empty{border:1px dashed var(--line);border-radius:var(--radius);padding:44px 20px;text-align:center;color:var(--muted)}
+.empty b{display:block;color:var(--ink);font-size:16px;margin-bottom:6px}
+
+.warn{
+  max-width:1280px;margin:16px auto 0;padding:12px 16px;
+  border:1px solid var(--apricot-deep);background:color-mix(in srgb,var(--apricot) 22%,var(--card));
+  color:var(--ink);border-radius:var(--radius);font-size:13.5px;
+}
+.warn code{font-family:"IBM Plex Mono",monospace;font-size:12px;direction:ltr;display:inline-block}
+
+footer{max-width:1280px;margin:0 auto;padding:0 24px 40px;color:var(--muted);font-size:12.5px}
+footer a{color:var(--slate);text-decoration:none;border-bottom:1px solid var(--line);direction:ltr;display:inline-block}
+html[data-theme="dark"] footer a{color:var(--apricot)}
+
+.toast{
+  position:fixed;bottom:24px;left:50%;transform:translate(-50%,26px);
+  background:var(--slate-deep);color:#fff;padding:11px 18px;border-radius:100px;
+  font-size:13.5px;box-shadow:0 10px 30px rgba(0,0,0,.28);
+  opacity:0;pointer-events:none;transition:opacity .16s,transform .16s;z-index:60;
+  display:flex;align-items:center;gap:10px;
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.toast code{font-family:"IBM Plex Mono",monospace;color:var(--apricot);direction:ltr;font-size:12.5px}
+
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+}
+@media (max-width:640px){
+  .board{padding:26px 16px 24px}
+  .controls-inner,.chips,main,footer{padding-left:16px;padding-right:16px}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}
+}
+</style>
+</head>
+<body>
+
+<header class="board">
+  <div class="board-inner">
+    <div>
+      <div class="eyebrow">issta&nbsp;·&nbsp;web icons</div>
+      <h1>ספריית האייקונים</h1>
+      <p class="sub">כל האייקונים מתוך גופן <code style="font-family:'IBM Plex Mono',monospace;direction:ltr">icomoon</code> של איסתא. לחיצה על אייקון מעתיקה את שם המחלקה, ולחיצה על <code style="font-family:'IBM Plex Mono',monospace">&lt;/&gt;</code> מעתיקה קטע HTML מוכן.</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><b id="stat-total">—</b><span>אייקונים</span></div>
+      <div class="stat"><b id="stat-multi">—</b><span>רב-צבעוניים</span></div>
+    </div>
+  </div>
+  <div class="perf"><span class="notch a"></span><span class="notch b"></span></div>
+</header>
+
+<div id="font-warn" hidden></div>
+
+<div class="controls">
+  <div class="controls-inner">
+    <div class="search">
+      <span class="glass">⌕</span>
+      <input id="q" type="search" autocomplete="off" spellcheck="false" placeholder="חיפוש לפי שם — hotel, car, arrow, e9b8…" aria-label="חיפוש אייקון">
+      <kbd>/</kbd>
+    </div>
+
+    <div class="seg" role="group" aria-label="סינון לפי סוג">
+      <button data-filter="all" aria-pressed="true">הכול</button>
+      <button data-filter="single" aria-pressed="false">חד-צבעי</button>
+      <button data-filter="multi" aria-pressed="false">רב-צבעוני</button>
+    </div>
+
+    <div class="field">
+      <label for="sort">מיון</label>
+      <select id="sort">
+        <option value="file">סדר בקובץ</option>
+        <option value="alpha">א-ב</option>
+        <option value="code">קוד תו</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="size">גודל</label>
+      <input id="size" type="range" min="20" max="88" step="4" value="40">
+      <span class="size-val" id="size-val">40px</span>
+    </div>
+
+    <div class="seg" role="group" aria-label="תצוגת צבע">
+      <button id="btn-color" aria-pressed="true">צבע מקורי</button>
+      <button id="btn-mono" aria-pressed="false">צבע אחיד</button>
+    </div>
+
+    <div class="seg" role="group" aria-label="ערכת נושא">
+      <button id="btn-light" aria-pressed="true">בהיר</button>
+      <button id="btn-dark" aria-pressed="false">כהה</button>
+    </div>
+  </div>
+
+  <div class="chips">
+    <span class="label">קפיצה מהירה:</span>
+    <button class="chip">hotel</button>
+    <button class="chip">flight</button>
+    <button class="chip">car</button>
+    <button class="chip">arrow</button>
+    <button class="chip">rate</button>
+    <button class="chip">chat</button>
+    <button class="chip">basis</button>
+    <button class="chip">policy</button>
+    <button class="chip">se-</button>
+  </div>
+</div>
+
+<main>
+  <p class="count" id="count"></p>
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="empty" hidden>
+    <b>אין אייקון שתואם לחיפוש</b>
+    נסה מונח קצר יותר, למשל <code style="font-family:'IBM Plex Mono',monospace">car</code> או <code style="font-family:'IBM Plex Mono',monospace">arrow</code>.
+  </div>
+</main>
+
+<footer>
+  מקור הנתונים:
+  <a href="https://cdn.issta.co.il/icons/issta-web-icons/style.css" target="_blank" rel="noopener">cdn.issta.co.il/icons/issta-web-icons/style.css</a>
+  — הדף מנסה למשוך את הרשימה מה-CDN בזמן טעינה, ואם החסימה של הדפדפן מונעת זאת הוא נופל חזרה לעותק מוטמע.
+</footer>
+
+<div class="toast" id="toast"><span>הועתק</span><code id="toast-code"></code></div>
+
+<!-- ======== עותק מוטמע של ה-CSS (fallback לפרסור כשה-fetch נחסם) ======== -->
+<script type="text/plain" id="src-css">
+.icon-se-ski:before{content:"\ebb0";color:#687482}.icon-se-car:before{content:"\ebad";color:#687482}.icon-se-cruise:before{content:"\ebae";color:#687482}.icon-se-packages:before{content:"\ebaf";color:#687482}.icon-se-sport:before{content:"\ebb1";color:#687482}.icon-se-villageresort:before{content:"\ebb2";color:#687482}.icon-room-king-size:before{content:"\ebac"}.icon-hotel-map:before{content:"\ebab";color:#fff}.icon-download:before{content:"\ebaa"}.icon-starts:before{content:"\eba6";color:#2aae54}.icon-credit-card:before{content:"\eba7";color:#2aae54}.icon-confirm:before{content:"\eba8";color:#2aae54}.icon-clock:before{content:"\eba9";color:#2aae54}.icon-discount:before{content:"\eba5";color:#2aae54}.icon-doc-prop:before{content:"\eba2"}.icon-main-ticket:before{content:"\eba3"}.icon-doc-cancel-circle:before{content:"\eba1"}.icon-count-man:before{content:"\eba4"}.icon-check-new:before{content:"\eb9e";color:#687482}.icon-no-refund-policy:before{content:"\eb96";color:#687482}.icon-full-refund-policy:before{content:"\eb97";color:#098137}.icon-message:before{content:"\eb9d"}.icon-no-smoking:before{content:"\e944";color:#687482}.icon-adult-room:before{content:"\e94c";color:#687482}.icon-room-size:before{content:"\eb9b";color:#687482}.icon-star-add-hotel:before{content:"\eb94";color:#d89b83}.icon-School-Bus-Side-Streamline-Core:before{content:"\eb93"}.icon-Hotel_Sun .path1:before{content:"\eb80";color:#ffc09c}.icon-Hotel_Sun .path2:before{content:"\eb81";margin-left:-.7626953125em;color:#ffc09c}.icon-Hotel_Sun .path3:before{content:"\eb82";margin-left:-.7626953125em;color:#ffc09c}.icon-Hotel_Sun .path4:before{content:"\eb83";margin-left:-.7626953125em;color:#ffc09c}.icon-Hotel_Sun .path5:before{content:"\eb84";margin-left:-.7626953125em;color:#ffc09c}.icon-Hotel_Sun .path6:before{content:"\eb85";margin-left:-.7626953125em;color:#ffc09c}.icon-Hotel_Sun .path7:before{content:"\eb86";margin-left:-.7626953125em;color:#ffc09c}.icon-Hotel_Sun .path8:before{content:"\eb87";margin-left:-.7626953125em;color:#ffc09c}.icon-Hotel_Sun .path9:before{content:"\eb88";margin-left:-.7626953125em;color:#ffc09c}.icon-Hotel_Sun .path10:before{content:"\eb89";margin-left:-.7626953125em;color:#ffc09c}.icon-Hotel_Sun .path11:before{content:"\eb8a";margin-left:-.7626953125em;color:#ffc09c}.icon-Hotel_Sun .path12:before{content:"\eb8b";margin-left:-.7626953125em;color:#ffc09c}.icon-Hotel_Sun .path13:before{content:"\eb8c";margin-left:-.7626953125em;color:#fff}.icon-Hotel_Sun .path14:before{content:"\eb8d";margin-left:-.7626953125em;color:#495e77}.icon-Hotel_Sun .path15:before{content:"\eb8e";margin-left:-.7626953125em;color:#ffc09c}.icon-Hotel_Sun .path16:before{content:"\eb8f";margin-left:-.7626953125em;color:#ffc09c}.icon-Hotel_Sun .path17:before{content:"\eb90";margin-left:-.7626953125em;color:#302e2f}.icon-Hotel_Sun .path18:before{content:"\eb91";margin-left:-.7626953125em;color:#302e2f}.icon-Hotel_Sun .path19:before{content:"\eb92";margin-left:-.7626953125em;color:#302e2f}.icon-Ferry11:before{content:"\eb7f"}.icon-Price-Included2 .path1:before{content:"\eb75";color:#ef9478}.icon-Price-Included2 .path2:before{content:"\eb76";margin-left:-1em;color:#000}.icon-Price-Included2 .path3:before{content:"\eb77";margin-left:-1em;color:#000}.icon-Price-Included2 .path4:before{content:"\eb78";margin-left:-1em;color:#000}.icon-Price-Included2 .path5:before{content:"\eb79";margin-left:-1em;color:#000}.icon-Price-Included2 .path6:before{content:"\eb7a";margin-left:-1em;color:#000}.icon-Price-Included2 .path7:before{content:"\eb7b";margin-left:-1em;color:#000}.icon-Price-Included2 .path8:before{content:"\eb7c";margin-left:-1em;color:#000}.icon-Price-Included2 .path9:before{content:"\eb7d";margin-left:-1em;color:#000}.icon-Price-Included2 .path10:before{content:"\eb7e";margin-left:-1em;color:#000}.icon-Arrows-thinking-1:before{content:"\eb5c"}.icon-Baggage-X2 .path1:before{content:"\eb5d";color:grey}.icon-Baggage-X2 .path2:before{content:"\eb5e";margin-left:-.9365234375em;color:grey}.icon-Baggage-X2 .path3:before{content:"\eb5f";margin-left:-.9365234375em;color:grey}.icon-Baggage-X2 .path4:before{content:"\eb60";margin-left:-.9365234375em;color:grey}.icon-Baggage-X2 .path5:before{content:"\eb61";margin-left:-.9365234375em;color:#000}.icon-Shild-corona4 .path1:before{content:"\eb62";color:#fff}.icon-Shild-corona4 .path2:before{content:"\eb63";margin-left:-.7451171875em;color:#ef9478}.icon-Shild-corona4 .path3:before{content:"\eb64";margin-left:-.7451171875em;color:#485d77}.icon-Shild-corona4 .path4:before{content:"\eb65";margin-left:-.7451171875em;color:#ffc09c}.icon-Shild-corona4 .path5:before{content:"\eb66";margin-left:-.7451171875em;color:#ffc09c}.icon-Shild-corona4 .path6:before{content:"\eb67";margin-left:-.7451171875em;color:#555}.icon-Shild-corona4 .path7:before{content:"\eb68";margin-left:-.7451171875em;color:#555}.icon-Shild-corona4 .path8:before{content:"\eb69";margin-left:-.7451171875em;color:#555}.icon-Shild-corona4 .path9:before{content:"\eb6a";margin-left:-.7451171875em;color:#555}.icon-Wow2 .path1:before{content:"\eb6b";color:#555}.icon-Wow2 .path2:before{content:"\eb6c";margin-left:-2.7060546875em;color:#555}.icon-Wow2 .path3:before{content:"\eb6d";margin-left:-2.7060546875em;color:#555}.icon-Wow2 .path4:before{content:"\eb6e";margin-left:-2.7060546875em;color:#ffc09c}.icon-Wow2 .path5:before{content:"\eb6f";margin-left:-2.7060546875em;color:#ffc09c}.icon-Wow2 .path6:before{content:"\eb70";margin-left:-2.7060546875em;color:#555}.icon-Wow2 .path7:before{content:"\eb71";margin-left:-2.7060546875em;color:#555}.icon-Wow2 .path8:before{content:"\eb72";margin-left:-2.7060546875em;color:#555}.icon-Wow2 .path9:before{content:"\eb73";margin-left:-2.7060546875em;color:#555}.icon-Happy-Baggage2 .path1:before{content:"\eb4e";color:#ffc09c}.icon-Happy-Baggage2 .path2:before{content:"\eb4f";margin-left:-.9609375em;color:#ffc09c}.icon-Happy-Baggage2 .path3:before{content:"\eb50";margin-left:-.9609375em;color:#000}.icon-Happy-Baggage2 .path4:before{content:"\eb51";margin-left:-.9609375em;color:#000}.icon-Happy-Baggage2 .path5:before{content:"\eb52";margin-left:-.9609375em;color:#000}.icon-Happy-Baggage2 .path6:before{content:"\eb53";margin-left:-.9609375em;color:#000}.icon-Heart2 .path1:before{content:"\eb54";color:#e04955}.icon-Heart2 .path2:before{content:"\eb55";margin-left:-1.150390625em;color:#000}.icon-Money-3 .path1:before{content:"\eb56";color:#fff}.icon-Money-3 .path2:before{content:"\eb57";margin-left:-.84375em;color:#0db14b}.icon-Money-3 .path3:before{content:"\eb58";margin-left:-.84375em;color:#0db14b}.icon-Money-3 .path4:before{content:"\eb59";margin-left:-.84375em;color:#000}.icon-Money-3 .path5:before{content:"\eb5a";margin-left:-.84375em;color:#000}.icon-Money-3 .path6:before{content:"\eb5b";margin-left:-.84375em;color:#000}.icon-flight-5:before{content:"\eb4d";color:#707070}.icon-search1:before{content:"\eb4c"}.icon-star:before{content:"\eb4b"}.icon-Sad-hotel-B4 .path1:before{content:"\eb3d";color:#aaa}.icon-Sad-hotel-B4 .path2:before{content:"\eb3e";margin-left:-2.048828125em;color:#fff}.icon-Sad-hotel-B4 .path3:before{content:"\eb3f";margin-left:-2.048828125em;color:#555}.icon-Sad-hotel-B4 .path4:before{content:"\eb40";margin-left:-2.048828125em;color:#ffc09c}.icon-Sad-hotel-B4 .path5:before{content:"\eb41";margin-left:-2.048828125em;color:#ffc09c}.icon-Sad-hotel-B4 .path6:before{content:"\eb42";margin-left:-2.048828125em;color:#302e2f}.icon-Sad-hotel-B4 .path7:before{content:"\eb43";margin-left:-2.048828125em;color:#302e2f}.icon-Sad-hotel-B4 .path8:before{content:"\eb44";margin-left:-2.048828125em;color:#302e2f}.icon-Sad-hotel-B4 .path9:before{content:"\eb45";margin-left:-2.048828125em;color:#aaa}.icon-Sad-hotel-B4 .path10:before{content:"\eb46";margin-left:-2.048828125em;color:#aaa}.icon-Sad-hotel-B4 .path11:before{content:"\eb47";margin-left:-2.048828125em;color:#aaa}.icon-Sad-hotel-B4 .path12:before{content:"\eb48";margin-left:-2.048828125em;color:#aaa}.icon-Sad-hotel-B4 .path13:before{content:"\eb49";margin-left:-2.048828125em;color:#aaa}.icon-Sad-hotel-B4 .path14:before{content:"\eb4a";margin-left:-2.048828125em;color:#aaa}.icon-Hammer2 .path1:before{content:"\eaed";color:#fbc2b7}.icon-Hammer2 .path2:before{content:"\eaee";margin-left:-.8701171875em;color:#555}.icon-Happy-stars-3 .path1:before{content:"\eaef";color:#ffc09c}.icon-Happy-stars-3 .path2:before{content:"\eaf0";margin-left:-2.408203125em;color:#ffc09c}.icon-Happy-stars-3 .path3:before{content:"\eaf1";margin-left:-2.408203125em;color:#ffc09c}.icon-Happy-stars-3 .path4:before{content:"\eaf2";margin-left:-2.408203125em;color:#ffc09c}.icon-Happy-stars-3 .path5:before{content:"\eaf3";margin-left:-2.408203125em;color:#ffc09c}.icon-Happy-stars-3 .path6:before{content:"\eaf4";margin-left:-2.408203125em;color:#ffc09c}.icon-Happy-stars-3 .path7:before{content:"\eaf5";margin-left:-2.408203125em;color:#ffc09c}.icon-Happy-stars-3 .path8:before{content:"\eaf6";margin-left:-2.408203125em;color:#ffc09c}.icon-Happy-stars-3 .path9:before{content:"\eaf7";margin-left:-2.408203125em;color:#ffc09c}.icon-Happy-stars-3 .path10:before{content:"\eaf8";margin-left:-2.408203125em;color:#ffc09c}.icon-Happy-stars-3 .path11:before{content:"\eaf9";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path12:before{content:"\eafa";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path13:before{content:"\eafb";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path14:before{content:"\eafc";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path15:before{content:"\eafd";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path16:before{content:"\eafe";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path17:before{content:"\eaff";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path18:before{content:"\eb00";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path19:before{content:"\eb01";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path20:before{content:"\eb02";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path21:before{content:"\eb03";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path22:before{content:"\eb04";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path23:before{content:"\eb05";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path24:before{content:"\eb06";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path25:before{content:"\eb07";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path26:before{content:"\eb08";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path27:before{content:"\eb09";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path28:before{content:"\eb0a";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path29:before{content:"\eb0b";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path30:before{content:"\eb0c";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path31:before{content:"\eb0d";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path32:before{content:"\eb0e";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path33:before{content:"\eb0f";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path34:before{content:"\eb10";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path35:before{content:"\eb11";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path36:before{content:"\eb12";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path37:before{content:"\eb13";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path38:before{content:"\eb14";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path39:before{content:"\eb15";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path40:before{content:"\eb16";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path41:before{content:"\eb17";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path42:before{content:"\eb18";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path43:before{content:"\eb19";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path44:before{content:"\eb1a";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path45:before{content:"\eb1b";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path46:before{content:"\eb1c";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path47:before{content:"\eb1d";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path48:before{content:"\eb1e";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path49:before{content:"\eb1f";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path50:before{content:"\eb20";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path51:before{content:"\eb21";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path52:before{content:"\eb22";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path53:before{content:"\eb23";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path54:before{content:"\eb24";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path55:before{content:"\eb25";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path56:before{content:"\eb26";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path57:before{content:"\eb27";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path58:before{content:"\eb28";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path59:before{content:"\eb29";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path60:before{content:"\eb2a";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path61:before{content:"\eb2b";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path62:before{content:"\eb2c";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path63:before{content:"\eb2d";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path64:before{content:"\eb2e";margin-left:-2.408203125em;color:#485d77}.icon-Happy-stars-3 .path65:before{content:"\eb2f";margin-left:-2.408203125em;color:#302e2f}.icon-Happy-stars-3 .path66:before{content:"\eb30";margin-left:-2.408203125em;color:#302e2f}.icon-Happy-stars-3 .path67:before{content:"\eb31";margin-left:-2.408203125em;color:#302e2f}.icon-Hotel .path1:before{content:"\eb32";color:#fff}.icon-Hotel .path2:before{content:"\eb33";margin-left:-.794921875em;color:#ffc09c}.icon-Hotel .path3:before{content:"\eb34";margin-left:-.794921875em;color:#ffc09c}.icon-Hotel .path4:before{content:"\eb35";margin-left:-.794921875em;color:#ffc09c}.icon-Hotel .path5:before{content:"\eb36";margin-left:-.794921875em;color:#ffc09c}.icon-Hotel .path6:before{content:"\eb37";margin-left:-.794921875em;color:#ffc09c}.icon-Hotel .path7:before{content:"\eb38";margin-left:-.794921875em;color:#ffc09c}.icon-Hotel .path8:before{content:"\eb39";margin-left:-.794921875em;color:#ffc09c}.icon-Hotel .path9:before{content:"\eb3a";margin-left:-.794921875em;color:#ffc09c}.icon-Hotel .path10:before{content:"\eb3b";margin-left:-.794921875em;color:#ffc09c}.icon-Hotel .path11:before{content:"\eb3c";margin-left:-.794921875em;color:#555}.icon-V4a:before{content:"\eaec"}.icon-Ski-rack:before{content:"\eaea"}.icon-Dizel1:before{content:"\eaeb"}.icon-CreditCard:before{content:"\eae9"}.icon-child21:before{content:"\ead9"}.icon-adult21 .path1:before{content:"\eada";color:#fff}.icon-adult21 .path2:before{content:"\eadb";margin-left:-.8740234375em;color:#000}.icon-adult21 .path3:before{content:"\eadc";margin-left:-.8740234375em;color:#fff}.icon-adult21 .path4:before{content:"\eadd";margin-left:-.8740234375em;color:#000}.icon-bed .path1:before{content:"\eade";color:#ffc09c}.icon-bed .path2:before{content:"\eadf";margin-left:-1.2294921875em;color:#ffc09c}.icon-bed .path3:before{content:"\eae0";margin-left:-1.2294921875em;color:#ffc09c}.icon-bed .path4:before{content:"\eae1";margin-left:-1.2294921875em;color:#555}.icon-sqm .path1:before{content:"\eae2";color:#ffbe92}.icon-sqm .path2:before{content:"\eae3";margin-left:-1em;color:#555}.icon-sqm .path3:before{content:"\eae4";margin-left:-1em;color:#555}.icon-cart .path1:before{content:"\eae5";color:#fff}.icon-cart .path2:before{content:"\eae6";margin-left:-1.08203125em;color:#fff}.icon-cart .path3:before{content:"\eae7";margin-left:-1.08203125em;color:#fff}.icon-cart .path4:before{content:"\eae8";margin-left:-1.08203125em;color:#2a3335}.icon-rate_sleep:before{content:"\eace"}.icon-rate_cleanliness:before{content:"\eacf"}.icon-rate_room:before{content:"\ead0"}.icon-rate_location:before{content:"\ead1"}.icon-rate_service:before{content:"\ead2"}.icon-rate_value:before{content:"\ead3"}.icon-trip-rate-one:before{content:"\ead4"}.icon-trip-rate-two:before{content:"\ead5"}.icon-trip-rate-three:before{content:"\ead6"}.icon-trip-rate-four:before{content:"\ead7"}.icon-trip-rate-five:before{content:"\ead8"}.icon-CancelPolicyRedStripe .path1:before{content:"\eabb";color:#ffd0b6}.icon-CancelPolicyRedStripe .path2:before{content:"\eabc";margin-left:-1.0341796875em;color:#ffd0b6}.icon-CancelPolicyRedStripe .path3:before{content:"\eabd";margin-left:-1.0341796875em;color:#555}.icon-CancelPolicyRedStripe .path4:before{content:"\eabe";margin-left:-1.0341796875em;color:#555}.icon-Expend:before{content:"\eabf";color:#555}.icon-Dollar:before{content:"\eac0";color:#555}.icon-images .path1:before{content:"\eac1";color:#ffbe92}.icon-images .path2:before{content:"\eac2";margin-left:-1.236328125em;color:#000}.icon-images .path3:before{content:"\eac3";margin-left:-1.236328125em;color:#000}.icon-images .path4:before{content:"\eac4";margin-left:-1.236328125em;color:#000}.icon-insta:before{content:"\eac5"}.icon-video:before{content:"\eac6"}.icon-virtual-tour .path1:before{content:"\eac7";color:#ffbe92}.icon-virtual-tour .path2:before{content:"\eac8";margin-left:-1.74609375em;color:#000}.icon-virtual-tour .path3:before{content:"\eac9";margin-left:-1.74609375em;color:#000}.icon-virtual-tour .path4:before{content:"\eaca";margin-left:-1.74609375em;color:#000}.icon-virtual-tour .path5:before{content:"\eacb";margin-left:-1.74609375em;color:#000}.icon-virtual-tour .path6:before{content:"\eacc";margin-left:-1.74609375em;color:#000}.icon-virtual-tour .path7:before{content:"\eacd";margin-left:-1.74609375em;color:#000}.icon-Arrow-Left1:before{content:"\ea47"}.icon-Arrow-Righ1:before{content:"\ea48"}.icon-Calender1:before{content:"\ea49"}.icon-Exclamation_mark1:before{content:"\ea4a";color:#ffb392}.icon-Filter:before{content:"\ea4b";color:#717579}.icon-Location1:before{content:"\ea4c"}.icon-Sorting:before{content:"\ea4d";color:#717579}.icon-Adult1a:before{content:"\ea4e"}.icon-Arrow-Down1:before{content:"\ea4f";color:#717579}.icon-Arrow-Left2:before{content:"\ea50";color:#555}.icon-Arrow-Righ11:before{content:"\ea51"}.icon-Calender11:before{content:"\ea52"}.icon-Car-AC1:before{content:"\ea53"}.icon-Car-Door1:before{content:"\ea54"}.icon-Car-Gear1:before{content:"\ea55"}.icon-Car-rent-color1 .path1:before{content:"\ea56";color:#0db14b}.icon-Car-rent-color1 .path2:before{content:"\ea57";margin-left:-1.8515625em;color:#000}.icon-Child1:before{content:"\ea58"}.icon-Location11:before{content:"\ea59"}.icon-Suitcase1:before{content:"\ea5a"}.icon-Troly1:before{content:"\ea5b"}.icon-V-Checkbox:before{content:"\ea5c"}.icon-Auto_Pass-1 .path1:before{content:"\ea5d";color:#e04955}.icon-Auto_Pass-1 .path2:before{content:"\ea5e";margin-left:-1.3349609375em;color:#000}.icon-Auto_Pass .path1:before{content:"\ea5f";color:#e04955}.icon-Auto_Pass .path2:before{content:"\ea60";margin-left:-1.3349609375em;color:#000}.icon-background_alarts:before{content:"\ea61";color:#ffb392}.icon-Car_Accident .path1:before{content:"\ea62";color:#e04955}.icon-Car_Accident .path2:before{content:"\ea63";margin-left:-2.169921875em;color:#000}.icon-Car_General .path1:before{content:"\ea64";color:#e04955}.icon-Car_General .path2:before{content:"\ea65";margin-left:-1.84765625em;color:#000}.icon-Car_General .path3:before{content:"\ea66";margin-left:-1.84765625em;color:#000}.icon-Car_General .path4:before{content:"\ea67";margin-left:-1.84765625em;color:#000}.icon-CarPeople2 .path1:before{content:"\ea68";color:#e04955}.icon-CarPeople2 .path2:before{content:"\ea69";margin-left:-1.8173828125em;color:#000}.icon-CarPeople2 .path3:before{content:"\ea6a";margin-left:-1.8173828125em;color:#000}.icon-CarPeople2 .path4:before{content:"\ea6b";margin-left:-1.8173828125em;color:#000}.icon-CarPeople2 .path5:before{content:"\ea6c";margin-left:-1.8173828125em;color:#000}.icon-Corona_Car2 .path1:before{content:"\ea6d";color:#e04955}.icon-Corona_Car2 .path2:before{content:"\ea6e";margin-left:-1.576171875em;color:#000}.icon-Cruise2_1 .path1:before{content:"\ea6f";color:#e04955}.icon-Cruise2_1 .path2:before{content:"\ea70";margin-left:-.5625em;color:#e04955}.icon-Cruise2_1 .path3:before{content:"\ea71";margin-left:-.5625em;color:#e04955}.icon-Cruise2_1 .path4:before{content:"\ea72";margin-left:-.5625em;color:#e04955}.icon-Cruise2_1 .path5:before{content:"\ea73";margin-left:-.5625em;color:#e04955}.icon-Cruise2_1 .path6:before{content:"\ea74";margin-left:-.5625em;color:#000}.icon-Cruise2_1 .path7:before{content:"\ea75";margin-left:-.5625em;color:#000}.icon-Cruise2_1 .path8:before{content:"\ea76";margin-left:-.5625em;color:#000}.icon-Mas2 .path1:before{content:"\ea77";color:#e04955}.icon-Mas2 .path2:before{content:"\ea78";margin-left:-.623046875em;color:#000}.icon-Mas2 .path3:before{content:"\ea79";margin-left:-.623046875em;color:#000}.icon-Mas2 .path4:before{content:"\ea7a";margin-left:-.623046875em;color:#000}.icon-Mas2 .path5:before{content:"\ea7b";margin-left:-.623046875em;color:#000}.icon-Mas2 .path6:before{content:"\ea7c";margin-left:-.623046875em;color:#000}.icon-One_way .path1:before{content:"\ea7d";color:#e04955}.icon-One_way .path2:before{content:"\ea7e";margin-left:-1.1669921875em;color:#e04955}.icon-One_way .path3:before{content:"\ea7f";margin-left:-1.1669921875em;color:#e04955}.icon-One_way .path4:before{content:"\ea80";margin-left:-1.1669921875em;color:#e04955}.icon-One_way .path5:before{content:"\ea81";margin-left:-1.1669921875em;color:#e04955}.icon-One_way .path6:before{content:"\ea82";margin-left:-1.1669921875em;color:#e04955}.icon-One_way .path7:before{content:"\ea83";margin-left:-1.1669921875em;color:#e04955}.icon-One_way .path8:before{content:"\ea84";margin-left:-1.1669921875em;color:#e04955}.icon-One_way .path9:before{content:"\ea85";margin-left:-1.1669921875em;color:#e04955}.icon-One_way .path10:before{content:"\ea86";margin-left:-1.1669921875em;color:#e04955}.icon-One_way .path11:before{content:"\ea87";margin-left:-1.1669921875em;color:#e04955}.icon-One_way .path12:before{content:"\ea88";margin-left:-1.1669921875em;color:#e04955}.icon-One_way .path13:before{content:"\ea89";margin-left:-1.1669921875em;color:#e04955}.icon-One_way .path14:before{content:"\ea8a";margin-left:-1.1669921875em;color:#e04955}.icon-One_way .path15:before{content:"\ea8b";margin-left:-1.1669921875em;color:#000}.icon-One_way .path16:before{content:"\ea8c";margin-left:-1.1669921875em;color:#000}.icon-One_way .path17:before{content:"\ea8d";margin-left:-1.1669921875em;color:#000}.icon-Winter_Car2 .path1:before{content:"\ea8e";color:#e04955}.icon-Winter_Car2 .path2:before{content:"\ea8f";margin-left:-1.671875em;color:#000}.icon-Winter_Car2 .path3:before{content:"\ea90";margin-left:-1.671875em;color:#000}.icon-CarPeople21 .path1:before{content:"\ea91";color:#e04955}.icon-CarPeople21 .path2:before{content:"\ea92";margin-left:-1.8173828125em;color:#000}.icon-CarPeople21 .path3:before{content:"\ea93";margin-left:-1.8173828125em;color:#000}.icon-CarPeople21 .path4:before{content:"\ea94";margin-left:-1.8173828125em;color:#000}.icon-CarPeople21 .path5:before{content:"\ea95";margin-left:-1.8173828125em;color:#000}.icon-Gift1:before{content:"\ea96";color:#555}.icon-Plus1:before{content:"\ea97"}.icon-I-1:before{content:"\ea98";color:#ffb392}.icon-Troly11:before{content:"\ea99"}.icon-V-1:before{content:"\ea9a";color:#008739}.icon-V-Tax:before{content:"\ea9b";color:#0db14b}.icon-Suitcase11:before{content:"\ea9c"}.icon-Minus-Tax:before{content:"\ea9d";color:#ffb392}.icon-Shild-color-2 .path1:before{content:"\ea9e";color:#000}.icon-Shild-color-2 .path2:before{content:"\ea9f";margin-left:-.74609375em;color:#fff}.icon-Shild-color-2 .path3:before{content:"\eaa0";margin-left:-.74609375em;color:#008739}.icon-Shild-color-2 .path4:before{content:"\eaa1";margin-left:-.74609375em;color:#000}.icon-Shild-color-1 .path1:before{content:"\eaa2";color:#000}.icon-Shild-color-1 .path2:before{content:"\eaa3";margin-left:-.74609375em;color:#fff}.icon-Shild-color-1 .path3:before{content:"\eaa4";margin-left:-.74609375em;color:#008739}.icon-Shild-color-1 .path4:before{content:"\eaa5";margin-left:-.74609375em;color:#000}.icon-Car-simple:before{content:"\eaa6"}.icon-Wifi:before{content:"\eaa7"}.icon-Ferry1:before{content:"\eaa8"}.icon-Bicycle_rack:before{content:"\eaa9"}.icon-Hot_spot:before{content:"\eaaa"}.icon-Out_of_hours:before{content:"\eaab"}.icon-Ski_rack:before{content:"\eaac"}.icon-Winter_tires_snow_chains:before{content:"\eaad"}.icon-GPS:before{content:"\eaae"}.icon-car_plus:before{content:"\eaaf"}.icon-Car-Bring1:before{content:"\eab0"}.icon-Car-Child1:before{content:"\eab1"}.icon-insurance2 .path1:before{content:"\eab2";color:#fff}.icon-insurance2 .path2:before{content:"\eab3";margin-left:-.7451171875em;color:grey}.icon-insurance2 .path3:before{content:"\eab4";margin-left:-.7451171875em;color:grey}.icon-insurance2 .path4:before{content:"\eab5";margin-left:-.7451171875em;color:grey}.icon-Search1:before{content:"\eab6"}.icon-Shild-color-11 .path1:before{content:"\eab7";color:#000}.icon-Shild-color-11 .path2:before{content:"\eab8";margin-left:-.74609375em;color:#fff}.icon-Shild-color-11 .path3:before{content:"\eab9";margin-left:-.74609375em;color:#008739}.icon-Shild-color-11 .path4:before{content:"\eaba";margin-left:-.74609375em;color:#000}.icon-CancelPolicy:before{content:"\ea29";color:#555}.icon-CheckinTime .path1:before{content:"\ea2a";color:#ffc09c}.icon-CheckinTime .path2:before{content:"\ea2b";margin-left:-1.5556640625em;color:#555}.icon-CheckinTime .path3:before{content:"\ea2c";margin-left:-1.5556640625em;color:#555}.icon-CheckoutTime .path1:before{content:"\ea2d";color:#ffc09c}.icon-CheckoutTime .path2:before{content:"\ea2e";margin-left:-1.541015625em;color:#555}.icon-CheckoutTime .path3:before{content:"\ea2f";margin-left:-1.541015625em;color:#555}.icon-Dog .path1:before{content:"\ea30";color:#ffc09c}.icon-Dog .path2:before{content:"\ea31";margin-left:-1.376953125em;color:#ffc09c}.icon-Dog .path3:before{content:"\ea32";margin-left:-1.376953125em;color:#555}.icon-Dog .path4:before{content:"\ea33";margin-left:-1.376953125em;color:#555}.icon-Dog .path5:before{content:"\ea34";margin-left:-1.376953125em;color:#555}.icon-Kosher .path1:before{content:"\ea35";color:#ffc09c}.icon-Kosher .path2:before{content:"\ea36";margin-left:-.89453125em;color:#555}.icon-Kosher .path3:before{content:"\ea37";margin-left:-.89453125em;color:#555}.icon-Light .path1:before{content:"\ea38";color:#ffbe92}.icon-Light .path2:before{content:"\ea39";margin-left:-.927734375em;color:#ffbe92}.icon-Light .path3:before{content:"\ea3a";margin-left:-.927734375em;color:#ffbe92}.icon-Light .path4:before{content:"\ea3b";margin-left:-.927734375em;color:#ffbe92}.icon-Light .path5:before{content:"\ea3c";margin-left:-.927734375em;color:#ffbe92}.icon-Light .path6:before{content:"\ea3d";margin-left:-.927734375em;color:#ffbe92}.icon-Light .path7:before{content:"\ea3e";margin-left:-.927734375em;color:#ffbe92}.icon-Light .path8:before{content:"\ea3f";margin-left:-.927734375em;color:#ffbe92}.icon-Light .path9:before{content:"\ea40";margin-left:-.927734375em;color:#ffbe92}.icon-Light .path10:before{content:"\ea41";margin-left:-.927734375em;color:#ffbe92}.icon-Light .path11:before{content:"\ea42";margin-left:-.927734375em;color:#555}.icon-Light .path12:before{content:"\ea43";margin-left:-.927734375em;color:#fff}.icon-Light .path13:before{content:"\ea44";margin-left:-.927734375em;color:#fff}.icon-ParkingCircle .path1:before{content:"\ea45";color:#555}.icon-ParkingCircle .path2:before{content:"\ea46";margin-left:-1em;color:#ffb392}.icon-LocationPinHollow:before{content:"\ea28"}.icon-Bus .path1:before{content:"\ea23";color:#ffc09c}.icon-Bus .path2:before{content:"\ea24";margin-left:-1.1650390625em;color:#555}.icon-Bus .path3:before{content:"\ea25";margin-left:-1.1650390625em;color:#555}.icon-Bus .path4:before{content:"\ea26";margin-left:-1.1650390625em;color:#555}.icon-Bus .path5:before{content:"\ea27";margin-left:-1.1650390625em;color:#555}.icon-Room .path1:before{content:"\ea19";color:#ffc09c}.icon-Room .path2:before{content:"\ea1a";margin-left:-.90625em;color:#555}.icon-Room .path3:before{content:"\ea1b";margin-left:-.90625em;color:#555}.icon-MealRedCircle .path1:before{content:"\ea1c";color:#ffc09c}.icon-MealRedCircle .path2:before{content:"\ea1d";margin-left:-1.04296875em;color:#555}.icon-MealRedCircle .path3:before{content:"\ea1e";margin-left:-1.04296875em;color:#555}.icon-MealRedCircle .path4:before{content:"\ea1f";margin-left:-1.04296875em;color:#555}.icon-Swimming .path1:before{content:"\ea20";color:#ffc09c}.icon-Swimming .path2:before{content:"\ea21";margin-left:-1.2666015625em;color:#555}.icon-Swimming .path3:before{content:"\ea22";margin-left:-1.2666015625em;color:#555}.icon-LocationPinCircle .path1:before{content:"\ea10";color:#fff}.icon-LocationPinCircle .path2:before{content:"\ea11";margin-left:-.6611328125em;color:#ffc09c}.icon-LocationPinCircle .path3:before{content:"\ea12";margin-left:-.6611328125em;color:#555}.icon-LocationPinCircle .path4:before{content:"\ea13";margin-left:-.6611328125em;color:#555}.icon-Map .path1:before{content:"\ea14";color:#ffc09c}.icon-Map .path2:before{content:"\ea15";margin-left:-.9921875em;color:#000}.icon-Map .path3:before{content:"\ea16";margin-left:-.9921875em;color:#000}.icon-ShareToWhatsapp .path1:before{content:"\ea17";color:#56bb40}.icon-ShareToWhatsapp .path2:before{content:"\ea18";margin-left:-1.0078125em;color:#fff}.icon-icon-check-circle-green .path1:before{content:"\ea09";color:#44dc7d}.icon-icon-check-circle-green .path2:before{content:"\ea0a";margin-left:-1.005859375em;color:#555}.icon-icon-check-circle-red .path1:before{content:"\ea0b";color:#ffc09c}.icon-icon-check-circle-red .path2:before{content:"\ea0c";margin-left:-1em;color:#555}.icon-icon-corona-price .path1:before{content:"\ea0d";color:#000}.icon-icon-corona-price .path2:before{content:"\ea0e";margin-left:-.9951171875em;color:#ef9478}.icon-icon-red-exclamation-mark:before{content:"\ea0f";color:#ffb392}.icon-Chat3 .path1:before{content:"\e9cb";color:#fff}.icon-Chat3 .path2:before{content:"\e9cc";margin-left:-1em;color:#fff}.icon-Chat3 .path3:before{content:"\e9cd";margin-left:-1em;color:#2a3335}.icon-Chat3 .path4:before{content:"\e9ce";margin-left:-1em;color:#2a3335}.icon-Chat3 .path5:before{content:"\e9cf";margin-left:-1em;color:#ffb392}.icon-Chat3 .path6:before{content:"\e9d0";margin-left:-1em;color:#ffb392}.icon-Chat3 .path7:before{content:"\e9d1";margin-left:-1em;color:#ffb392}.icon-Chat4 .path1:before{content:"\e9d2";color:#f2f2f2}.icon-Chat4 .path2:before{content:"\e9d3";margin-left:-1.0009765625em;color:#555}.icon-Chat4 .path3:before{content:"\e9d4";margin-left:-1.0009765625em;color:#fff}.icon-Chat4 .path4:before{content:"\e9d5";margin-left:-1.0009765625em;color:#2a3335}.icon-Chat4 .path5:before{content:"\e9d6";margin-left:-1.0009765625em;color:#2a3335}.icon-Chat4 .path6:before{content:"\e9d7";margin-left:-1.0009765625em;color:#ffb392}.icon-Chat4 .path7:before{content:"\e9d8";margin-left:-1.0009765625em;color:#ffb392}.icon-Chat4 .path8:before{content:"\e9d9";margin-left:-1.0009765625em;color:#ffb392}.icon-Chat4 .path9:before{content:"\e9da";margin-left:-1.0009765625em;color:#000}.icon-Chat4 .path10:before{content:"\e9db";margin-left:-1.0009765625em;color:#000}.icon-Chat4 .path11:before{content:"\e9dc";margin-left:-1.0009765625em;color:#000}.icon-Chat4 .path12:before{content:"\e9dd";margin-left:-1.0009765625em;color:#000}.icon-Talktous3 .path1:before{content:"\e9de";color:#f2f2f2}.icon-Talktous3 .path2:before{content:"\e9df";margin-left:-1em;color:#555}.icon-Talktous3 .path3:before{content:"\e9e0";margin-left:-1em;color:#000}.icon-Talktous3 .path4:before{content:"\e9e1";margin-left:-1em;color:#000}.icon-Talktous3 .path5:before{content:"\e9e2";margin-left:-1em;color:#000}.icon-Talktous3 .path6:before{content:"\e9e3";margin-left:-1em;color:#000}.icon-Talktous3 .path7:before{content:"\e9e4";margin-left:-1em;color:#000}.icon-Talktous3 .path8:before{content:"\e9e5";margin-left:-1em;color:#000}.icon-Talktous3 .path9:before{content:"\e9e6";margin-left:-1em;color:#000}.icon-Talktous3 .path10:before{content:"\e9e7";margin-left:-1em;color:#000}.icon-Talktous3 .path11:before{content:"\e9e8";margin-left:-1em;color:#000}.icon-Talktous4 .path1:before{content:"\e9e9";color:#fff}.icon-Talktous4 .path2:before{content:"\e9ea";margin-left:-1em;color:#ffd0b6}.icon-Talktous4 .path3:before{content:"\e9eb";margin-left:-1em;color:#ffd0b6}.icon-Talktous4 .path4:before{content:"\e9ec";margin-left:-1em;color:#ffd0b6}.icon-Talktous4 .path5:before{content:"\e9ed";margin-left:-1em;color:#2a3335}.icon-Talktous4 .path6:before{content:"\e9ee";margin-left:-1em;color:#2a3335}.icon-Talktous4 .path7:before{content:"\e9ef";margin-left:-1em;color:#2a3335}.icon-Talktous4 .path8:before{content:"\e9f0";margin-left:-1em;color:#555}.icon-TalktousX4 .path1:before{content:"\e9f1";color:#fff}.icon-TalktousX4 .path2:before{content:"\e9f2";margin-left:-1em;color:#ffd0b6}.icon-TalktousX4 .path3:before{content:"\e9f3";margin-left:-1em;color:#ffd0b6}.icon-TalktousX4 .path4:before{content:"\e9f4";margin-left:-1em;color:#ffd0b6}.icon-TalktousX4 .path5:before{content:"\e9f5";margin-left:-1em;color:#555}.icon-TalktousX4 .path6:before{content:"\e9f6";margin-left:-1em;color:#000}.icon-Whatsup3 .path1:before{content:"\e9f7";color:#fff}.icon-Whatsup3 .path2:before{content:"\e9f8";margin-left:-1em;color:#56bb40}.icon-Whatsup3 .path3:before{content:"\e9f9";margin-left:-1em;color:#fff}.icon-Whatsup3 .path4:before{content:"\e9fa";margin-left:-1em;color:#2a3335}.icon-Whatsup3 .path5:before{content:"\e9fb";margin-left:-1em;color:#2a3335}.icon-Whatsup4 .path1:before{content:"\e9fc";color:#f2f2f2}.icon-Whatsup4 .path2:before{content:"\e9fd";margin-left:-1em;color:#555}.icon-Whatsup4 .path3:before{content:"\e9fe";margin-left:-1em;color:#56bb40}.icon-Whatsup4 .path4:before{content:"\e9ff";margin-left:-1em;color:#fff}.icon-Whatsup4 .path5:before{content:"\ea00";margin-left:-1em;color:#2a3335}.icon-Whatsup4 .path6:before{content:"\ea01";margin-left:-1em;color:#2a3335}.icon-Whatsup4 .path7:before{content:"\ea02";margin-left:-1em;color:#000}.icon-Whatsup4 .path8:before{content:"\ea03";margin-left:-1em;color:#000}.icon-Whatsup4 .path9:before{content:"\ea04";margin-left:-1em;color:#000}.icon-Whatsup4 .path10:before{content:"\ea05";margin-left:-1em;color:#000}.icon-Whatsup4 .path11:before{content:"\ea06";margin-left:-1em;color:#000}.icon-Whatsup4 .path12:before{content:"\ea07";margin-left:-1em;color:#000}.icon-Whatsup4 .path13:before{content:"\ea08";margin-left:-1em;color:#000}.icon-Corona-Alret .path1:before{content:"\e9c9";color:#ffd0b6}.icon-Corona-Alret .path2:before{content:"\e9ca";margin-left:-1.1748046875em;color:#000}.icon-moon:before{content:"\e9c8"}.icon-Minus-Tax1:before{content:"\e9c6";color:#ffb392}.icon-V-Tax1:before{content:"\e9c7";color:#0db14b}.icon-Airplane-Down:before{content:"\e9c4";color:#7d9cb8}.icon-Airplane-Up:before{content:"\e9c5";color:#7d9cb8}.icon-Printer:before{content:"\e9c2"}.icon-check-circle:before{content:"\e9c3";color:#008739}.icon-Include-Price1:before{content:"\e9c1";color:#485d77}.icon-Handbag-2:before{content:"\e9bf"}.icon-Suitcase-2:before{content:"\e9c0"}.icon-Call:before{content:"\e9be";color:#0db04b}.icon-arrow-right:before{content:"\e9ba"}.icon-bullet-green:before{content:"\e9bb";color:#00ac4f}.icon-x_icon:before{content:"\e9b9";color:#e04955}.icon-add-green:before{content:"\e9b1";color:#178823}.icon-hotel:before{content:"\e9b8"}.icon-two-arrows-left:before{content:"\e9bc"}.icon-info-official:before{content:"\e9b2";color:#717579}.icon-addition:before{content:"\e9b3"}.icon-coupon:before{content:"\e9b4";color:#178823}.icon-check-mark:before{content:"\e9b5";color:#48a0dc}.icon-flight:before{content:"\e9b6"}.icon-pencil-slant:before{content:"\e9b7"}.icon-lock:before{content:"\e9bd"}.icon-tickets:before{content:"\e9ae"}.icon-no-luggage:before{content:"\e9ad";color:#4f4b4b}.icon-cost:before{content:"\e9a6"}.icon-details_i:before{content:"\e9a7"}.icon-location_pin:before{content:"\e9a8"}.icon-leap:before{content:"\e9a9"}.icon-pack_include:before{content:"\e9aa"}.icon-route:before{content:"\e9ab"}.icon-sun:before{content:"\e9ac"}.icon-eye:before{content:"\e9a5";color:#fff}.icon-extend:before{content:"\e975";color:#fff}.icon-snow-park:before{content:"\e94d";color:#72849a}.icon-synthetic-snow:before{content:"\e951";color:#72849a}.icon-elavators:before{content:"\e952";color:#72849a}.icon-site-height:before{content:"\e954";color:#72849a}.icon-mountain:before{content:"\e95f";color:#91a6bf}.icon-block:before{content:"\e93d";color:#607288}.icon-cancel-flight:before{content:"\e942";color:#607288}.icon-giftbox:before{content:"\e92c"}.icon-smiley:before{content:"\e92a"}.icon-check:before{content:"\e925"}.icon-carDoor_icon:before{content:"\e961"}.icon-collectCar_icon:before{content:"\e962"}.icon-fuel_icon:before{content:"\e963"}.icon-hiluhim_icon:before{content:"\e964"}.icon-kmLimit_icon:before{content:"\e9a1"}.icon-refundCar_icon:before{content:"\e9a4"}.icon-magen:before{content:"\e943"}.icon-woman:before{content:"\e960"}.icon-order-view:before{content:"\e959"}.icon-person-info:before{content:"\e95a"}.icon-telphone-background:before{content:"\e95b"}.icon-phone-background:before{content:"\e95c"}.icon-envelop-background:before{content:"\e95d"}.icon-file-text:before{content:"\e95e"}.icon-big_lug_icon:before{content:"\e957"}.icon-small_lug_icon:before{content:"\e958"}.icon-wallet_icon:before{content:"\e956"}.icon-gallery:before{content:"\e955"}.icon-door:before{content:"\e904"}.icon-arrow-down:before{content:"\e99b"}.icon-airplane-arrive-table:before{content:"\e99c"}.icon-airplane-depart-table:before{content:"\e99d"}.icon-arrows:before{content:"\e99e"}.icon-budget:before{content:"\e99f"}.icon-equalizer:before{content:"\e9a0"}.icon-menu2:before{content:"\e9a2"}.icon-left-double-arrow:before{content:"\e9a3"}.icon-no_lugg:before{content:"\e99a"}.icon-air:before{content:"\e989"}.icon-change:before{content:"\e98a"}.icon-children:before{content:"\e98b"}.icon-disabled:before{content:"\e98c"}.icon-families:before{content:"\e98d"}.icon-food:before{content:"\e98e"}.icon-gym:before{content:"\e98f"}.icon-intart:before{content:"\e990"}.icon-negishut2:before{content:"\e991"}.icon-parking:before{content:"\e992"}.icon-pets:before{content:"\e993"}.icon-rests:before{content:"\e994"}.icon-sinagogue:before{content:"\e995"}.icon-spa:before{content:"\e996"}.icon-swpool:before{content:"\e997"}.icon-transfer:before{content:"\e998"}.icon-wifi:before{content:"\e999"}.icon-upDown:before{content:"\e988"}.icon-main_left:before{content:"\e986"}.icon-main_right:before{content:"\e987"}.icon-back_icon:before{content:"\e985"}.icon-bundle:before{content:"\e983"}.icon-ticker:before{content:"\e984"}.icon-call:before{content:"\e982"}.icon-flightback:before{content:"\e981"}.icon-v_icon:before{content:"\e980"}.icon-kafri:before{content:"\e900"}.icon-sport:before{content:"\e901"}.icon-back:before{content:"\e902"}.icon-calendar:before{content:"\e903"}.icon-cars:before{content:"\e905"}.icon-close:before{content:"\e906"}.icon-dates-arrow:before{content:"\e907"}.icon-delete:before{content:"\e908"}.icon-flights:before{content:"\e909"}.icon-to:before{content:"\e90a"}.icon-hotels:before{content:"\e90b"}.icon-class_icon:before{content:"\e90c"}.icon-menu:before{content:"\e90d"}.icon-open_more:before{content:"\e90e"}.icon-from:before{content:"\e90f"}.icon-vacations:before{content:"\e910"}.icon-close-more:before{content:"\e911"}.icon-date-end:before{content:"\e912"}.icon-date-start:before{content:"\e913"}.icon-blog:before{content:"\e914"}.icon-bsis_lina:before{content:"\e915"}.icon-like:before{content:"\e916"}.icon-filter:before{content:"\e917"}.icon-search:before{content:"\e918"}.icon-sort:before{content:"\e919"}.icon-abroad:before{content:"\e91a"}.icon-concerts:before{content:"\e91b"}.icon-last_min:before{content:"\e91c"}.icon-org:before{content:"\e91d"}.icon-pnim:before{content:"\e91e"}.icon-uniE91F:before{content:"\e91f"}.icon-uniE920:before{content:"\e920"}.icon-uniE921:before{content:"\e921"}.icon-shait2:before{content:"\e922"}.icon-sport2:before{content:"\e923"}.icon-support:before{content:"\e924"}.icon-uniE926:before{content:"\e926"}.icon-face_full:before{content:"\e927"}.icon-google_full:before{content:"\e928"}.icon-tw_full:before{content:"\e929"}.icon-branches:before{content:"\e92b"}.icon-fl_update:before{content:"\e92d"}.icon-id:before{content:"\e92e"}.icon-mial:before{content:"\e92f"}.icon-phone:before{content:"\e930"}.icon-lastcall:before{content:"\e931"}.icon-meurganim:before{content:"\e932"}.icon-shait:before{content:"\e933"}.icon-ski:before{content:"\e934"}.icon-uniE935:before{content:"\e935"}.icon-uniE936:before{content:"\e936"}.icon-uniE937:before{content:"\e937"}.icon-tzeirim:before{content:"\e938"}.icon-place:before{content:"\e939"}.icon-robot:before{content:"\e93a"}.icon-service:before{content:"\e93b"}.icon-fax:before{content:"\e93c"}.icon-phone_branch:before{content:"\e93e"}.icon-ok_icon:before{content:"\e93f"}.icon-chanceflurries:before{content:"\e940"}.icon-chancerain:before{content:"\e941"}.icon-clear:before{content:"\e945"}.icon-cloudy:before{content:"\e946"}.icon-default:before{content:"\e947"}.icon-flurries:before{content:"\e948"}.icon-fog:before{content:"\e949"}.icon-hazy:before{content:"\e94a"}.icon-mostlycloudy:before{content:"\e94b"}.icon-partlysunny:before{content:"\e94e"}.icon-rain:before{content:"\e94f"}.icon-sleet:before{content:"\e950"}.icon-tstorms:before{content:"\e953"}.icon-man1:before{content:"\e965"}.icon-students_star:before{content:"\e966"}.icon-concertst_empty:before{content:"\e967"}.icon-bundle_empty:before{content:"\e968"}.icon-car_empty:before{content:"\e969"}.icon-hotel_empty:before{content:"\e96a"}.icon-maslul_day_empty:before{content:"\e96b"}.icon-organized_empty:before{content:"\e96c"}.icon-sport_empty:before{content:"\e96d"}.icon-alert:before{content:"\e96e"}.icon-info:before{content:"\e96f"}.icon-stadium:before{content:"\e970"}.icon-companies_icon:before{content:"\e971"}.icon-comb_icon:before{content:"\e972"}.icon-menu_arrow:before{content:"\e973"}.icon-ccard_icon:before{content:"\e974"}.icon-flights_empty:before{content:"\e976"}.icon-electr_icon:before{content:"\e977"}.icon-lang_icon:before{content:"\e978"}.icon-mivtza:before{content:"\e979"}.icon-atractions_icon:before{content:"\e97a"}.icon-family_icon:before{content:"\e97b"}.icon-night_icon:before{content:"\e97c"}.icon-coins:before{content:"\e97d"}.icon-flightdur:before{content:"\e97e"}.icon-localtime:before{content:"\e97f"}.icon-Adult:before{content:"\e9af"}.icon-Child:before{content:"\e9b0"}.icon-Include-Price11:before{content:"\eb74"}.icon-faq-questions:before{content:"\eb95"}.icon-basis-half-board:before{content:"\eb98";color:#098137}.icon-basis-breakfast-included:before{content:"\eb99";color:#098137}.icon-basis-night-only:before{content:"\eb9a";color:#687482}.icon-zoom-plus:before{content:"\eb9c"}.icon-free-promotion:before{content:"\eb9f";color:#2aae54}.icon-luggage-promotion:before{content:"\eba0";color:#2aae54}.icon-category-gallery:before{content:"\ebb3";color:#2aae54}
+</script>
+
+<script>
+(function () {
+  "use strict";
+
+  var CSS_URL = "https://cdn.issta.co.il/icons/issta-web-icons/style.css";
+  var RULE_RE = /\.icon-([A-Za-z0-9_\-]+)(?:\s+\.path(\d+))?:before\s*\{([^}]*)\}/g;
+
+  var icons = [];          // [{name, cls, paths:[n], code, order}]
+  var cells = [];          // [{el, hay, multi, name, code, order}]
+  var state = { q: "", filter: "all", sort: "file" };
+
+  /* ---------- parsing ---------- */
+  function parseCss(text) {
+    var map = Object.create(null), order = 0, m;
+    RULE_RE.lastIndex = 0;
+    while ((m = RULE_RE.exec(text)) !== null) {
+      var name = m[1];
+      var pathIdx = m[2] ? parseInt(m[2], 10) : 0;
+      var body = m[3] || "";
+      var cm = body.match(/content:\s*"\\([0-9a-fA-F]+)"/);
+      if (!cm) continue;
+      var code = cm[1].toLowerCase();
+
+      var rec = map[name];
+      if (!rec) { rec = map[name] = { name: name, cls: "icon-" + name, paths: [], code: code, order: order++ }; }
+      if (pathIdx) { if (rec.paths.indexOf(pathIdx) === -1) rec.paths.push(pathIdx); }
+    }
+    var out = [];
+    for (var k in map) { map[k].paths.sort(function (a, b) { return a - b; }); out.push(map[k]); }
+    out.sort(function (a, b) { return a.order - b.order; });
+    return out;
+  }
+
+  /* ---------- rendering ---------- */
+  function snippetFor(ic) {
+    if (!ic.paths.length) return '<i class="' + ic.cls + '"></i>';
+    var inner = ic.paths.map(function (p) { return '<span class="path' + p + '"></span>'; }).join("");
+    return '<span class="' + ic.cls + '">' + inner + "</span>";
+  }
+
+  function buildCell(ic) {
+    var cell = document.createElement("button");
+    cell.type = "button";
+    cell.className = "cell";
+    cell.title = ic.cls + "  ·  לחיצה מעתיקה את שם המחלקה";
+
+    var art = document.createElement("div");
+    art.className = "art";
+    var ico = document.createElement("span");
+    ico.className = ic.cls + " ico";
+    if (ic.paths.length) {
+      ic.paths.forEach(function (p) {
+        var s = document.createElement("span");
+        s.className = "path" + p;
+        ico.appendChild(s);
+      });
+    }
+    art.appendChild(ico);
+
+    var nm = document.createElement("div");
+    nm.className = "nm";
+    nm.textContent = ic.cls;
+
+    var uni = document.createElement("div");
+    uni.className = "uni";
+    uni.textContent = "\\" + ic.code;
+
+    cell.appendChild(art);
+    cell.appendChild(nm);
+    cell.appendChild(uni);
+
+    if (ic.paths.length) {
+      var b = document.createElement("span");
+      b.className = "badge";
+      b.textContent = ic.paths.length + " paths";
+      cell.appendChild(b);
+    }
+
+    var snip = document.createElement("span");
+    snip.className = "snip";
+    snip.setAttribute("role", "button");
+    snip.setAttribute("tabindex", "0");
+    snip.title = "העתקת קטע HTML מלא";
+    snip.textContent = "</>";
+    snip.addEventListener("click", function (e) {
+      e.stopPropagation();
+      copy(snippetFor(ic), "HTML של " + ic.cls, cell);
+    });
+    snip.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); e.stopPropagation(); copy(snippetFor(ic), "HTML של " + ic.cls, cell); }
+    });
+    cell.appendChild(snip);
+
+    cell.addEventListener("click", function () { copy(ic.cls, ic.cls, cell); });
+
+    return cell;
+  }
+
+  function render(list) {
+    var grid = document.getElementById("grid");
+    var frag = document.createDocumentFragment();
+    cells = list.map(function (ic) {
+      var el = buildCell(ic);
+      frag.appendChild(el);
+      return {
+        el: el,
+        hay: (ic.cls + " " + ic.code).toLowerCase(),
+        multi: ic.paths.length > 0,
+        name: ic.cls.toLowerCase(),
+        code: ic.code,
+        order: ic.order
+      };
+    });
+    grid.innerHTML = "";
+    grid.appendChild(frag);
+
+    document.getElementById("stat-total").textContent = list.length;
+    document.getElementById("stat-multi").textContent = list.filter(function (i) { return i.paths.length > 0; }).length;
+  }
+
+  /* ---------- filtering ---------- */
+  function apply() {
+    var terms = state.q.trim().toLowerCase().split(/\s+/).filter(Boolean);
+    var shown = 0;
+    cells.forEach(function (c) {
+      var ok = state.filter === "all" ||
+               (state.filter === "multi" && c.multi) ||
+               (state.filter === "single" && !c.multi);
+      if (ok && terms.length) {
+        for (var i = 0; i < terms.length; i++) {
+          if (c.hay.indexOf(terms[i]) === -1) { ok = false; break; }
+        }
+      }
+      c.el.style.display = ok ? "" : "none";
+      if (ok) shown++;
+    });
+    document.getElementById("count").innerHTML =
+      "מוצגים <b>" + shown + "</b> מתוך <b>" + cells.length + "</b> אייקונים";
+    document.getElementById("empty").hidden = shown !== 0;
+  }
+
+  function resort() {
+    var grid = document.getElementById("grid");
+    var sorted = cells.slice();
+    if (state.sort === "alpha") sorted.sort(function (a, b) { return a.name.localeCompare(b.name); });
+    else if (state.sort === "code") sorted.sort(function (a, b) { return a.code.localeCompare(b.code); });
+    else sorted.sort(function (a, b) { return a.order - b.order; });
+    var frag = document.createDocumentFragment();
+    sorted.forEach(function (c) { frag.appendChild(c.el); });
+    grid.appendChild(frag);
+  }
+
+  /* ---------- copy + toast ---------- */
+  var toastTimer;
+  function copy(text, label, cell) {
+    var done = function () {
+      var t = document.getElementById("toast");
+      document.getElementById("toast-code").textContent = label;
+      t.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(function () { t.classList.remove("show"); }, 1600);
+      if (cell) { cell.classList.add("copied"); setTimeout(function () { cell.classList.remove("copied"); }, 900); }
+    };
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(done, function () { fallbackCopy(text); done(); });
+    } else { fallbackCopy(text); done(); }
+  }
+  function fallbackCopy(text) {
+    var ta = document.createElement("textarea");
+    ta.value = text; ta.setAttribute("readonly", "");
+    ta.style.cssText = "position:fixed;top:-1000px";
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand("copy"); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+
+  /* ---------- controls ---------- */
+  var q = document.getElementById("q");
+  q.addEventListener("input", function () { state.q = q.value; apply(); });
+
+  document.querySelectorAll("[data-filter]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      document.querySelectorAll("[data-filter]").forEach(function (b) { b.setAttribute("aria-pressed", "false"); });
+      btn.setAttribute("aria-pressed", "true");
+      state.filter = btn.dataset.filter;
+      apply();
+    });
+  });
+
+  document.getElementById("sort").addEventListener("change", function (e) {
+    state.sort = e.target.value; resort();
+  });
+
+  var size = document.getElementById("size");
+  size.addEventListener("input", function () {
+    document.documentElement.style.setProperty("--icon-size", size.value + "px");
+    document.getElementById("size-val").textContent = size.value + "px";
+  });
+
+  var btnColor = document.getElementById("btn-color"), btnMono = document.getElementById("btn-mono");
+  function setMono(on) {
+    document.getElementById("grid").classList.toggle("mono", on);
+    btnMono.setAttribute("aria-pressed", String(on));
+    btnColor.setAttribute("aria-pressed", String(!on));
+  }
+  btnMono.addEventListener("click", function () { setMono(true); });
+  btnColor.addEventListener("click", function () { setMono(false); });
+
+  var btnLight = document.getElementById("btn-light"), btnDark = document.getElementById("btn-dark");
+  function setTheme(dark) {
+    document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+    btnDark.setAttribute("aria-pressed", String(dark));
+    btnLight.setAttribute("aria-pressed", String(!dark));
+  }
+  btnDark.addEventListener("click", function () { setTheme(true); });
+  btnLight.addEventListener("click", function () { setTheme(false); });
+  setTheme(false);
+
+  document.querySelectorAll(".chip").forEach(function (chip) {
+    chip.addEventListener("click", function () {
+      q.value = chip.textContent.trim();
+      state.q = q.value; apply(); q.focus();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "/" && document.activeElement !== q) { e.preventDefault(); q.focus(); q.select(); }
+    if (e.key === "Escape" && document.activeElement === q) { q.value = ""; state.q = ""; apply(); }
+  });
+
+  /* ---------- boot ---------- */
+  var embedded = document.getElementById("src-css").textContent;
+  icons = parseCss(embedded);
+  render(icons);
+  apply();
+
+  // ניסיון לרענן את הרשימה מה-CDN; אם הדפדפן חוסם, נשארים עם העותק המוטמע
+  fetch(CSS_URL, { cache: "no-cache" })
+    .then(function (r) { return r.ok ? r.text() : Promise.reject(); })
+    .then(function (text) {
+      var fresh = parseCss(text);
+      if (fresh.length && fresh.length !== icons.length) {
+        icons = fresh; render(icons); resort(); apply();
+      }
+    })
+    .catch(function () { /* שקט — העותק המוטמע כבר עובד */ });
+
+  // בדיקה שהגופן באמת נטען
+  setTimeout(function () {
+    var ok = true;
+    try { ok = document.fonts && document.fonts.check('1em icomoon'); } catch (e) { ok = true; }
+    if (!ok) {
+      var w = document.getElementById("font-warn");
+      w.className = "warn";
+      w.hidden = false;
+      w.innerHTML = 'הגופן <code>icomoon</code> לא נטען, כך שהריבועים בגריד הם מציין מקום. השמות והקודים עדיין נכונים וניתנים להעתקה. בדוק חיבור אל <code>cdn.issta.co.il</code>.';
+    }
+  }, 2500);
+})();
+</script>
+</body>
+</html>
